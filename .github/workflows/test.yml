@@ -17,7 +17,6 @@ jobs:
           New-Item -Path 'artifacts' -ItemType Directory -Force
           New-Item -Path 'artifacts\test.txt' -ItemType File -Force
   deploy:
-    needs: build
     steps:
       - name: Publish Files
         uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
