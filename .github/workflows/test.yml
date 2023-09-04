@@ -2,11 +2,6 @@ name: Test Script
 
 on: [workflow_dispatch]
 
-env:
-  R2_KEY: ${{ secrets.KEY }}
-  R2_SECRET: ${{ secrets.SECRET }}
-  R2_ENDPOINT: ${{ secrets.URL }}
-
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -16,11 +11,12 @@ jobs:
         run: |
           New-Item -Path 'artifacts' -ItemType Directory -Force
           New-Item -Path 'artifacts\test.txt' -ItemType File -Force
-  deploy:
-    steps:
-      - name: Publish Files
-        uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
         with:
-          key: ${{ env.R2_KEY }}
-          secret: ${{ env.R2_SECRET }}
-          endpoint: ${{ env.R2_ENDPOINT }}
+          name: ${{ github.event.repository.name }}
+          path: artifacts
+  deploy:
+    name: Publish Files
+    uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
+    secrets: inherit
