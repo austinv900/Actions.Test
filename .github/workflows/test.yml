@@ -15,6 +15,7 @@ jobs:
     name: Publish R2
     needs: build
     uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
+    secrets: inherit
     with:
       key: ${{ secrets.KEY }}
       secret: ${{ secrets.SECRET }}
