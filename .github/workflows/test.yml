@@ -2,6 +2,11 @@ name: Test Script
 
 on: [workflow_dispatch]
 
+env:
+  R2_KEY: ${{ secrets.KEY }}
+  R2_SECRET: ${{ secrets.SECRET }}
+  R2_ENDPOINT: ${{ secrets.URL }}
+
 jobs:
   build:
     runs-on: ubuntu-22.04
@@ -17,6 +22,6 @@ jobs:
     uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
     secrets: inherit
     with:
-      key: ${{ secrets.KEY }}
-      secret: ${{ secrets.SECRET }}
-      endpoint: ${{ secrets.URL }}
+      key: ${{ env.R2_KEY }}
+      secret: ${{ env.R2_SECRET }}
+      endpoint: ${{ env.R2_ENDPOINT }}
