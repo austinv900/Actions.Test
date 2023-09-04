@@ -20,6 +20,8 @@ jobs:
     name: Publish Files
     needs: build
     uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
+    with:
+      generate-filehash: true
     secrets:
       CLOUDFLARE_R2_KEY: ${{ secrets.CLOUDFLARE_R2_KEY }}
       CLOUDFLARE_R2_SECRET: ${{ secrets.CLOUDFLARE_R2_SECRET }}
