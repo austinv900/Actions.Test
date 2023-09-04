@@ -1,0 +1,11 @@
+name: Test Script
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: MrBlue/Oxide.Rust/.github/workflows/build.yaml@develop
+      with:
+        branch-postfix: "-develop"
