@@ -17,10 +17,11 @@ jobs:
           New-Item -Path 'artifacts' -ItemType Directory -Force
           New-Item -Path 'artifacts\test.txt' -ItemType File -Force
   deploy:
-    name: Publish R2
     needs: build
-    uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
-    with:
-      key: ${{ env.R2_KEY }}
-      secret: ${{ env.R2_SECRET }}
-      endpoint: ${{ env.R2_ENDPOINT }}
+    steps:
+      - name: Publish Files
+        uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
+        with:
+          key: ${{ env.R2_KEY }}
+          secret: ${{ env.R2_SECRET }}
+          endpoint: ${{ env.R2_ENDPOINT }}
