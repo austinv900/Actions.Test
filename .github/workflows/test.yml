@@ -4,8 +4,17 @@ on: [workflow_dispatch]
 
 jobs:
   build:
-    name: Run Blue Build
-    uses: MrBlue/Oxide.Rust/.github/workflows/build.yaml@develop
-    secrets: inherit
-    with:
-      branch-postfix: "-develop"
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Create Random File
+        shell: pwsh
+        run: |
+          New-Item -Path 'artifacts' -ItemType Directory -Force
+          New-Item -Path 'artifacts\test.txt' -ItemType File -Force
+  deploy:
+    name: Publish R2
+    needs: build
+    uses: OxideMod/Actions/r2-publish.yml@main
+      key: ${{ secrets.KEY }}
+      secret: ${{ secrets.SECRET }}
+      endpoint: ${{ secrets.URL }}
