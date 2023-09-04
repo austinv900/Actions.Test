@@ -14,7 +14,7 @@ jobs:
   deploy:
     name: Publish R2
     needs: build
-    uses: OxideMod/Actions/r2-publish.yml@main
+    uses: OxideMod/Actions/.github/workflows/r2-publish.yml@main
     with:
       key: ${{ secrets.KEY }}
       secret: ${{ secrets.SECRET }}
